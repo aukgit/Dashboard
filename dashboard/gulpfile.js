@@ -23,7 +23,12 @@ gulp.task('less', function () {
 
 // Minify compiled CSS
 gulp.task('minify-css', ['less'], function () {
-    return gulp.src('dist/css/sb-admin-2.css')
+
+    var files = [
+        'dist/css/sb-admin-2.css'
+    ];
+
+    return gulp.src(files)
         .pipe(cleanCSS({ compatibility: 'ie8' }))
         .pipe(rename({ suffix: '.min' }))
         .pipe(gulp.dest('dist/css'))
@@ -35,7 +40,12 @@ gulp.task('minify-css', ['less'], function () {
 // Copy JS to dist
 gulp.task('js',
     function () {
-        return gulp.src(['js/sb-admin-2.js'])
+
+        var files = [
+            'js/sb-admin-2.js'
+        ];
+
+        return gulp.src(files)
             .pipe(header(banner, { pkg: pkg }))
             .pipe(gulp.dest('dist/js'))
             .pipe(browserSync.reload({
@@ -45,7 +55,11 @@ gulp.task('js',
 
 // Minify JS
 gulp.task('minify-js', ['js'], function () {
-    return gulp.src('js/sb-admin-2.js')
+    var files = [
+        'js/*.js',
+    ];
+
+    return gulp.src(files)
         .pipe(uglify())
         .pipe(header(banner, { pkg: pkg }))
         .pipe(rename({ suffix: '.min' }))

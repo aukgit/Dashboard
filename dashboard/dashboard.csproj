@@ -67,12 +67,14 @@
   <ItemGroup>
     <Content Include="data\flot-data.js" />
     <Content Include="data\morris-data.js" />
+    <Content Include="dist\css\bootstrap-select.min.css" />
     <Content Include="dist\css\sb-admin-2.css" />
     <Content Include="dist\css\sb-admin-2.min.css" />
     <Content Include="dist\js\sb-admin-2.js" />
     <Content Include="dist\js\sb-admin-2.min.js" />
     <Content Include="gulpfile.js" />
     <Content Include="index.html" />
+    <Content Include="js\bootstrap-select.min.js" />
     <Content Include="js\sb-admin-2.js" />
     <Content Include="packages.config" />
     <Content Include="bower.json" />
@@ -126,6 +128,7 @@
     <Content Include="vendor\font-awesome\scss\_spinning.scss" />
     <Content Include="vendor\font-awesome\scss\_stacked.scss" />
     <Content Include="vendor\font-awesome\scss\_variables.scss" />
+    <Content Include="LICENSE" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
