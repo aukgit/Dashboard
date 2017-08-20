@@ -46,3 +46,34 @@ jspm_packages
 # Yarn Integrity file
 .yarn-integrity
 
+[Bb]in
+[Oo]bj
+[Tt]est[Rr]esults
+*.suo
+*.user
+*.[Cc]ache
+*[Rr]esharper*
+dashboard\obj\*.*
+dashboard\bin\debug\*.*
+.DS_Store?
+ehthumbs.db
+Icon?
+Thumbs.db
+.dll
+bin/
+obj/
+/packages/*/lib/*.dll
+/packages/*.dll
+/packages/*/*.dll
+/packages/*/lib/*/*.dll
+/packages/*/lib/*.*
+*.exe
+
+# NuGet Packages
+*.nupkg
+# The packages folder can be ignored because of Package Restore
+**/packages/*
+# except build/, which is used as an MSBuild target.
+!**/packages/build/
+# Uncomment if necessary however generally it will be regenerated when needed
+#!**/packages/repositories.config
