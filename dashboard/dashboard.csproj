@@ -70,11 +70,13 @@
     <Content Include="dist\css\bootstrap-select.min.css" />
     <Content Include="dist\css\sb-admin-2.css" />
     <Content Include="dist\css\sb-admin-2.min.css" />
+    <Content Include="dist\js\bootstrap-select.min.js" />
+    <Content Include="dist\js\jira-custom.min.js" />
     <Content Include="dist\js\sb-admin-2.js" />
     <Content Include="dist\js\sb-admin-2.min.js" />
     <Content Include="gulpfile.js" />
     <Content Include="index.html" />
-    <Content Include="js\bootstrap-select.min.js" />
+    <Content Include="js\jira-custom.js" />
     <Content Include="js\sb-admin-2.js" />
     <Content Include="packages.config" />
     <Content Include="bower.json" />
@@ -82,8 +84,12 @@
     <Content Include="less\sb-admin-2.less" />
     <Content Include="less\variables.less" />
     <Content Include="package.json" />
+    <Content Include="pages\index - Copy.html" />
     <Content Include="vendor\bootstrap-social\bootstrap-social.less" />
     <Content Include="vendor\bootstrap-social\bootstrap-social.scss" />
+    <Content Include="vendor\bootstrap\css\lumen.bootstrap.min.css" />
+    <Content Include="vendor\bootstrap\css\simplex.bootstrap.min.css" />
+    <Content Include="vendor\bootstrap\css\unitied.bootstrap.min.css" />
     <Content Include="vendor\bootstrap\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="vendor\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="vendor\bootstrap\fonts\glyphicons-halflings-regular.woff" />
