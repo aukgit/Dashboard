@@ -3,6 +3,9 @@
   "title": "POC Admin dashboard",
   "version": "0.1",
   "author": "Md. Alim Ul Karim",
+  "port":{
+	"api":"8080"
+  },
   "devDependencies": {
     "browser-sync": "^2.13.0",
     "gulp": "^3.9.1",
