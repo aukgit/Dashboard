@@ -2,9 +2,7 @@
   "name": "poc-dashboard",
   "title": "POC Admin dashboard",
   "version": "0.1",
- 
-  "author": "POC Dashboard",
-  
+  "author": "Md. Alim Ul Karim",
   "devDependencies": {
     "browser-sync": "^2.13.0",
     "gulp": "^3.9.1",
@@ -16,6 +14,13 @@
     "gulp-less": "^3.1.0",
     "gulp-rename": "^1.2.2",
     "gulp-strip-debug": "^1.1.0",
-    "gulp-uglify": "^1.5.4"
+    "gulp-uglify": "^1.5.4",
+    "express": "~4.0.0",
+    "morgan": "~1.0.0",
+    "mongoose": "~4.6.8",
+    "body-parser": "~1.0.1"
+  },
+  "dependencies": {
+    "path": "^0.12.7"
   }
 }

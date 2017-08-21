@@ -37,35 +37,70 @@
         var userId = jsonSearch(values, "name", "user-id"),
             pass = jsonSearch(values, "name", "password");
 
+        //var loginArgs = {
+        //    data: {
+        //        "username": userId.value,
+        //        "password": pass.value
+        //    },
+        //    headers: {
+        //        "Content-Type": "application/json"
+        //    }
+        //};
+
         var loginArgs = {
-
-            "username": userId.value,
-            "password": pass.value
-
+            username: userId.value,
+            password: pass.value
         };
 
-        console.log(loginArgs);
+
+        var jsonString = JSON.stringify(loginArgs);
+
+        var json2 = {
+            "username": "Faiz Mohammed",
+            "password": "4Update.access!"
+        };
+
+        console.log(json2);
+        console.log(jsonString);
+
+        //$.ajaxSetup({
+        //    beforeSend: function (xhr) {
+        //        xhr.setRequestHeader('contentType', "application/json");
+        //        xhr.setRequestHeader('Access-Control-Allow-Origin', "*");
+        //    }
+        //});
         $.ajax({
-            type: "POST,",
+            type: "POST",
             url: "https://jira.update.com/rest/auth/1/session",
-            data: loginArgs,
-            dataType: "json",
-            xhrFields: {
-                // The 'xhrFields' property sets additional fields on the XMLHttpRequest.
-                // This can be used to set the 'withCredentials' property.
-                // Set the value to 'true' if you'd like to pass cookies to the server.
-                // If this is enabled, your server must respond with the header
-                // 'Access-Control-Allow-Credentials: true'.
-                withCredentials: true
-            },
+            data: jsonString,
+            contentType: "application/json",
+            dataType:"json",
+            //xhrFields: {
+            //    // The 'xhrFields' property sets additional fields on the XMLHttpRequest.
+            //    // This can be used to set the 'withCredentials' property.
+            //    // Set the value to 'true' if you'd like to pass cookies to the server.
+            //    // If this is enabled, your server must respond with the header
+            //    // 'Access-Control-Allow-Credentials: true'.
+            //    withCredentials: true
+            //},
+            //headers: {
+            //    // Set any custom headers here.
+            //    // If you set any non-simple headers, your server must include these
+            //    // headers in the 'Access-Control-Allow-Headers' response header.
+            //    "Content-Type": "application/json"
+            //},
+
+            //headers: {
+            //    'Access-Control-Allow-Origin': "*",
+            //    //'Access-Control-Allow-Credentials': true,
+            //    contentType: "application/json"
+            //},
             headers: {
-                // Set any custom headers here.
-                // If you set any non-simple headers, your server must include these
-                // headers in the 'Access-Control-Allow-Headers' response header.
-                "Content-Type": "application/json"
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
             },
             success: function (response) {
-                console.log('Success');
+                console.log("Success");
                 console.log(response);
             },
             error: function (x, e, d) {
