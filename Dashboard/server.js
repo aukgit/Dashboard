@@ -24,31 +24,16 @@ var sess = {
     saveUninitialized: true
 }
 
-if (app.get('env') === 'production') {
+if(app.get('env') === 'production') {
     app.set('trust proxy', 1); // trust first proxy 
     sess.cookie.secure = true; // serve secure cookies 
 }
 
 app.use(session(sess));
 
-
-var getOptions = {
-    method: 'GET',
-    headers: {
-        'Accept': 'application/json',
-        'Accept-Charset': 'utf-8',
-    }
-};
-
-var postOptions = {
-    method: 'POST',
-    headers: {
-        'Accept': 'application/json',
-        'Accept-Charset': 'utf-8',
-    }
-};
-
-
+var isEmpty = function (o) {
+    return o === null || o === undefined;
+}
 
 // configure app
 app.use(morgan('dev')); // log requests to the console
@@ -81,37 +66,39 @@ router.get('/', function (req, res) {
 });
 
 
-// on routes that end in /bears
-// ----------------------------------------------------
-router.route('/:name')
+// on routes defined dynamically.
 
-    // create a bear (accessed at POST http://localhost:8080/bears)
-    .post(function (req, res) {
-        callfunction(req, res, postOptions);
+// each api/x goes through specific x.js file.
+var defineCommonRoutes = function (arrays) {
+   
+    for (var i = 0; i < arrays.length; i++) {
+        var item = arrays[i];
 
-    })
+        router
+            .route(item)
+            .post(function (req, res) {
+                callfunction(req, res, 'Post');
+            })
+            .get(function (req, res) {
+                callfunction(req, res, 'Get');
+            }).put(function (req, res) {
+                callfunction(req, res, 'Put');
+            }).delete(function (req, res) {
+                callfunction(req, res, 'Delete');
+            });
+    }
+}
 
-    // get all the bears (accessed at GET http://localhost:8080/api/bears)
-    .get(function (req, res) {
-        callfunction(req, res, getOptions);
-        //res.send("bears" + JSON.stringify(getResponseFromFile(req.params.name)));
-    });
+var possibleRoutes = [
+    "/:name",
+    "/:name/:specificFunction",
+    "/:name/:id",
+    "/:name/:specificFunction/:id",
+    "/:name/:specificFunction/:id/:id2"
+];
 
-router.route('/:name/:p1/:p2/:p3')
 
-    // create a bear (accessed at POST http://localhost:8080/bears)
-    .post(function (req, res) {
-        callfunction(req, res, postOptions);
-
-    })
-
-    // get all the bears (accessed at GET http://localhost:8080/api/bears)
-    .get(function (req, res) {
-        
-        callfunction(req, res, getOptions);
-        //res.send("bears" + JSON.stringify(getResponseFromFile(req.params.name)));
-    });
-
+defineCommonRoutes(possibleRoutes);
 
 var getResponseFromFile = function (name) {
     if (name) {
@@ -119,21 +106,61 @@ var getResponseFromFile = function (name) {
     }
 }
 
-var callfunction = function (req, res, options) {
-    var name = req.params.name;
+var callfunction = function (req, res, type) {
+    console.log(req.params);
+
+    var params = req.params,
+        name = params.name,
+        functionName,
+        runningFunction;
+
+    var possibleFunctionsNames = createPossibleFunctionNames(req, res, type);
+
     if (name) {
         var fileJs = getResponseFromFile(name);
-        request(options, function () {
-            res.send(JSON.stringify(fileJs[name].apply(this, [app, router, config, options, req, req.params])));
-        });
+
+        for (var i = 0; i < possibleFunctionsNames.length; i++) {
+            functionName = possibleFunctionsNames[i];
+            if (!isEmpty(fileJs[functionName])) {
+                runningFunction = fileJs[functionName];
+                break;
+            } else {
+                if ((possibleFunctionsNames.length - 1) === i) {
+                    res.send("Sorry file [" + name + ".js] doesn't have any of these [" + possibleFunctionsNames.join(",") + "] functions.");
+                    return;
+                }
+            }
+        }
+
+        console.log(runningFunction);
+
+        res.send(JSON.stringify(runningFunction.apply(this, [req, req.params, app, config])));
     }
 }
 
-router.route('/example')
-    // get all the bears (accessed at GET http://localhost:8080/api/example)
-    .get(function (req, res) {
-        console.log("example loaded in get mode.");
-    });
+var createPossibleFunctionNames = function (req, res, type) {
+    var possibilities = [];
+
+    var params = req.params,
+        name = params.name,
+        functionName;
+
+   
+    if (params.specificFunction) {
+        functionName = params.specificFunction;
+    } else {
+        functionName = params.name;
+    }
+
+    possibilities.push(functionName + type);
+    possibilities.push(name + type);
+    possibilities.push(functionName);
+    possibilities.push(name);
+
+    // console.log(possibilities);
+
+    return possibilities;
+}
 
 // REGISTER OUR ROUTES -------------------------------
 app.use('/api', router);
@@ -145,4 +172,4 @@ app.use('/api', router);
 
 app.listen(port);
 
-console.log('Magic happens on port ' + port);
+console.log('Running at :' + port);
