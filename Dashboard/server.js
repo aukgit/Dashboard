@@ -16,13 +16,13 @@ var uuidv1 = require('uuid/v1');
 
 var sess = {
     genid: function () {
-        return uuidv1(); // use UUIDs for session IDs 
+        return "xx" + uuidv1(); // use UUIDs for session IDs 
     },
     secret: uuidv1(),
     cookie: {},
     resave: true,
     saveUninitialized: true
-}
+} 
 
 if(app.get('env') === 'production') {
     app.set('trust proxy', 1); // trust first proxy 
@@ -134,9 +134,9 @@ var callfunction = function (req, res, type) {
 
         console.log(runningFunction);
 
-        res.send(JSON.stringify(runningFunction.apply(this, [req, req.params, app, config])));
+        res.send(JSON.stringify(runningFunction.apply(this, [req, req.params, req.body, app, config])));
     }
-}
+} 
 
 var createPossibleFunctionNames = function (req, res, type) {
     var possibilities = [];
