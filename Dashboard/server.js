@@ -11,6 +11,25 @@ var ports = config.port;
 var apiPort = ports.api;
 var url = config.env.urls[config.env.current] + ":" + apiPort;
 var request = require('request');
+var session = require('express-session');
+var uuidv1 = require('uuid/v1');
+
+var sess = {
+    genid: function () {
+        return uuidv1(); // use UUIDs for session IDs 
+    },
+    secret: uuidv1(),
+    cookie: {},
+    resave: true,
+    saveUninitialized: true
+}
+
+if (app.get('env') === 'production') {
+    app.set('trust proxy', 1); // trust first proxy 
+    sess.cookie.secure = true; // serve secure cookies 
+}
+
+app.use(session(sess));
 
 
 var getOptions = {
@@ -88,6 +107,7 @@ router.route('/:name/:p1/:p2/:p3')
 
     // get all the bears (accessed at GET http://localhost:8080/api/bears)
     .get(function (req, res) {
+        
         callfunction(req, res, getOptions);
         //res.send("bears" + JSON.stringify(getResponseFromFile(req.params.name)));
     });
@@ -101,7 +121,6 @@ var getResponseFromFile = function (name) {
 
 var callfunction = function (req, res, options) {
     var name = req.params.name;
-    console.log(name);
     if (name) {
         var fileJs = getResponseFromFile(name);
         request(options, function () {
@@ -111,7 +130,7 @@ var callfunction = function (req, res, options) {
 }
 
 router.route('/example')
-    // get all the bears (accessed at GET http://localhost:8080/api/bears)
+    // get all the bears (accessed at GET http://localhost:8080/api/example)
     .get(function (req, res) {
         console.log("example loaded in get mode.");
     });
