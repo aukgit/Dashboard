@@ -12,10 +12,8 @@ var apiPort = ports.api;
 var url = config.env.urls[config.env.current] + ":" + apiPort;
 var request = require('request');
 
-console.log(url);
 
 var getOptions = {
-    url: url + "/api",
     method: 'GET',
     headers: {
         'Accept': 'application/json',
@@ -24,7 +22,6 @@ var getOptions = {
 };
 
 var postOptions = {
-    url: url + "/api",
     method: 'POST',
     headers: {
         'Accept': 'application/json',
