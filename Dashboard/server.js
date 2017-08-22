@@ -134,7 +134,7 @@ var callfunction = function (req, res, type) {
 
         console.log(runningFunction);
 
-        res.send(JSON.stringify(runningFunction.apply(this, [req, req.params, req.body, app, config])));
+        res.json(runningFunction.apply(this, [req, req.params, req.body, app, config]));
     }
 } 
 

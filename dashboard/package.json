@@ -14,8 +14,9 @@
         },
         "current": "dev"
     },
-    "jiraUrl": "https://jira.update.com/rest/",
-    "authUrl": "https://jira.update.com/rest/auth/1/session",
+    "jiraUrl": "jira.update.com",
+    "jiraApiUrl": "/rest/api/2/search",
+    "authUrl": "/rest/auth/1/session",
     "devDependencies": {
         "browser-sync": "^2.13.0",
         "gulp": "^3.9.1",
