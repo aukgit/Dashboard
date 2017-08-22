@@ -121,23 +121,13 @@ module.exports = {
         /// <param name="checkDurationInMilisec">by default it is 450ms</param>
         /// <returns type="">return data when the processing is done.</returns>
 
-        var https = require("https");
-        var sleep = require("system-sleep");
-        var data = args.data;
-        var headers = args.headers;
-
-        var query = JSON.stringify(data);
-        var results = [], result = null;
-
-        var isEmpty = function (o) {
-            return o === undefined || o === null;
-        };
-
-        var options = {
-            hostname: hostName,
-            path: path,
-            method: "POST"
-        }
+       
+        var result = null;
+        var globals = require("./globals"),
+            isEmpty = globals.isEmpty,
+            promiseRequest = globals.getClientPostPromise;
+   
+        
 
         if (isEmpty(acceptingStatus)) {
             acceptingStatus = 200;
@@ -151,62 +141,14 @@ module.exports = {
             checkDurationInMilisec = 4;
         }
 
-        console.log("---------------- [Start] New Request at : " + hostName + path + "---------------------");
-        var incrementingIndex = 0;
-        var req2 = https.request(options,
-            function (resp) {
-                // if the statusCode isn't what we expect, get out of here
-                if (resp.statusCode !== acceptingStatus) {
-                    console.log("StatusCode=" + resp.statusCode);
-                    return null;
-                }
+        var promise = promiseRequest(hostName, path, args, limitChunkNumber, acceptingStatus, checkDurationInMilisec);
 
-                console.log("reading data : ");
-                resp.on("data", function (dataChunk) {
-                    //  console.log('BODY: ' + cssMinified);
-                    results.push(dataChunk);
 
-                    if (limitChunkNumber > 0) {
-                        if (results.length >= limitChunkNumber) {
-                            result = results.join("");
-                            //console.log("done reading");
-                            console.log("---------- [End] at : " + hostName + path + " with " + resp.statusCode + ", chunk :" + results.length + "---------");
-                            return result;
-                        }
-                    }
-
-                    //console.log(dataChunk);
-                });
-
-                resp.on("end", function () {
-                    result = results.join("");
-                    //console.log("done reading");
-                    console.log("---------- [End] at : " + hostName + path + " with " + resp.statusCode + "---------");
-                    return result;
-                });
-                //resp.pipe(process.stdout);
-            });
-
-        req2.on("error", function (err) {
-            throw err;
+        promise.then((resultx) => {
+            result = resultx;
+            return resultx;
         });
 
-        req2.setHeader("Content-Type", "application/json");
-        req2.setHeader("Content-Length", query.length);
-
-        if (!isEmpty(headers)) {
-            for (var key in headers) {
-                if (headers.hasOwnProperty(key)) {
-                    // console.log(key + " -> " + headers[key]);
-                    req2.setHeader(key, headers[key]);
-                }
-            }
-        }
-
-        req2.end(query, "utf8");
-        // console.log(req2.output);
-
-        // console.log("before waiting");
 
         while (result === null) {
             sleep(checkDurationInMilisec);
