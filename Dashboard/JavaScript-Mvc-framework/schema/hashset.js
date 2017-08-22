@@ -1,7 +1,7 @@
 ﻿/// <reference path="../extensions/clone.js" />
 
 ; $.app = $.app || {};
-; $.app.schema.hashset = {
+$.app.schema.hashset = {
     capacity: 1,
     list: {
         array: null,

@@ -40,6 +40,12 @@ $.findCached = function (selector, force) {
     /// <param name="selector" type="type"></param>
     var self = $.jQueryCaching;
     var $e;
+
+    // this below code will run from app.setup function please check
+    //if ($.jQueryCaching.hashset === null) {
+    //    $.jQueryCaching.initialize(350, force);
+    //}
+
     if (force === true) {
         $e = $(selector);
         self.hashset.addUnique(selector, $e, true);
@@ -61,6 +67,13 @@ $.findCachedId = function (id, force) {
     /// <param name="selector" type="type"></param>
     var self = $.jQueryCaching;
     var $e;
+
+
+    // this below code will run from app.setup function please check
+    //if ($.jQueryCaching.hashset === null) {
+    //    $.jQueryCaching.initialize(350, force);
+    //}
+
     if (force === true) {
         $e = $.byId(id);
         self.hashset.addUnique(id, $e, true);

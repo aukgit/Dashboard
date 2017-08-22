@@ -59,24 +59,29 @@ gulp.task("js-mvc",
 
         var files = [
             "JavaScript-Mvc-framework/Prototype/Array.js",
-            "JavaScript-Mvc-framework/jQueryCaching.js",
             "JavaScript-Mvc-framework/app.js",
 
             "JavaScript-Mvc-framework/app/*.js",
-
             "JavaScript-Mvc-framework/app/service.js",
-            "JavaScript-Mvc-framework/app/service/*.js",
-            "JavaScript-Mvc-framework/app/schema/*.js",
-            "JavaScript-Mvc-framework/app/extensions/*.js",
-            "JavaScript-Mvc-framework/app/controllers/*.js",
-            "JavaScript-Mvc-framework/app/component/*.js",
-            "JavaScript-Mvc-framework/app/events/*.js",
+
+            "JavaScript-Mvc-framework/service/*.js",
+            "JavaScript-Mvc-framework/extensions/*.js",
+            "JavaScript-Mvc-framework/controllers/*.js",
+            "JavaScript-Mvc-framework/component/*.js",
+            "JavaScript-Mvc-framework/events/*.js",
+            "JavaScript-Mvc-framework/schema/*.js",
+
+            "JavaScript-Mvc-framework/jQueryCaching.js",
+            "JavaScript-Mvc-framework/libs/jquery.blockUI.js", // required
+            "JavaScript-Mvc-framework/libs/toastr.js", // required
+            "JavaScript-Mvc-framework/libs/FrontEnd/wow.js",
             "JavaScript-Mvc-framework/app.run.js"
- 
+
+
         ];
 
         return gulp.src(files)
-            .pipe(uglify())
+            //.pipe(uglify())
             .pipe(concat("js-mvc.js"))
             .pipe(rename({ suffix: ".min" }))
             .pipe(gulp.dest("dist/js"))
@@ -170,6 +175,8 @@ gulp.task("dev", ["browserSync", "less", "minify-css", "js", "minify-js", "js-mv
     gulp.watch("less/*.less", ["less"]);
     gulp.watch("dist/css/*.css", ["minify-css"]);
     gulp.watch("js/*.js", ["minify-js"]);
+    gulp.watch("JavaScript-Mvc-framework/*.js", ["js-mvc"]);
+    gulp.watch("JavaScript-Mvc-framework/**/*.js", ["js-mvc"]);
     // Reloads the browser whenever HTML or JS files change
     gulp.watch("views/*.html", browserSync.reload);
     gulp.watch("dist/js/*.js", browserSync.reload);
