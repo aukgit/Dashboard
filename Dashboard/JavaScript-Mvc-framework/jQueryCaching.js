@@ -88,3 +88,15 @@ $.findCachedId = function (id, force) {
         return item.value;
     }
 }
+
+$.jsonSearch = function (jsonArray, fieldName, fieldValueLookingfor) {
+    
+    for (var i = 0; i < jsonArray.length; i++) {
+        var item = jsonArray[i];
+        if (item[fieldName] === fieldValueLookingfor) {
+            return item;
+        }
+    }
+
+    return null;
+}

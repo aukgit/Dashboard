@@ -25,6 +25,42 @@
 </head>
 <body>
     <div class="container" id="login-page" data-action="index">
+        <div class="hide ">
+            <div id="loading-bar">
+                <div class="default-loading-bar">
+                    <div class="loading-bar-container">
+                        <div class="loading-bar"></div>
+                        <div class="loading-bar"></div>
+                        <div class="loading-bar"></div>
+                        <div class="loading-bar"></div>
+                        <div class="loading-bar"></div>
+                        <div class="loading-bar"></div>
+                    </div>
+                    <h1 class="spinner-content">...Loading request...</h1>
+                </div>
+            </div>
+        </div>
+        <div id="loading-bar-full-screen" class="loading-bar-full-screen fixed">
+            <div class="container">
+                <div class="vertical-center">
+                    <div class="signal-display-container">
+                        <div>
+                            <div class="loading-bar-container">
+                                <div class="loading-bar"></div>
+                                <div class="loading-bar"></div>
+                                <div class="loading-bar"></div>
+                                <div class="loading-bar"></div>
+                                <div class="loading-bar"></div>
+                                <div class="loading-bar"></div>
+                            </div>
+                            <div id="full-screen-spinner-content" class="spinner-content">
+                                ...Please wait...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div id="hidden-fields-container">
             <input type="hidden" name="is-logged" value="false" />
             <input type="hidden" name="initialize" value="" />
@@ -37,7 +73,7 @@
                         <h3 class="panel-title">Please Sign In</h3>
                     </div>
                     <div class="panel-body">
-                        <form role="form">
+                        <form role="form" id="login-form">
                             <fieldset>
                                 <div class="form-group">
                                     <input class="form-control" placeholder="Jira Login username" name="email" type="text" autofocus>
@@ -51,7 +87,7 @@
                                     </label>
                                 </div>
                                 <!-- Change this to a button or input when using this as a form -->
-                                <a href="index.html" class="btn btn-lg btn-success btn-block">Login</a>
+                                <button class="btn btn-lg btn-success btn-block">Login</button>
                             </fieldset>
                         </form>
                     </div>
@@ -67,10 +103,10 @@
     <script src="../vendor/metisMenu/metisMenu.min.js"></script>
     <script src="../js/jquery.cookie.js"></script>
     <!-- Custom Theme JavaScript -->
+    <script src="../dist/js/jquery.cookie.min.js"></script>
     <script src="../dist/js/sb-admin-2.js"></script>
     <script src="../js/jira-custom.js"></script>
 
     <script src="../dist/js/js-mvc.min.js"></script>
-    <script src="../dist/js/jquery.cookie.min.js"></script>
 </body>
 </html>

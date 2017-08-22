@@ -33,8 +33,44 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>
-<div id="wrapper">
+<body id="index-page" data-action="index">
+    <div id="wrapper">
+        <div class="hide ">
+            <div id="loading-bar">
+                <div class="default-loading-bar">
+                    <div class="loading-bar-container">
+                        <div class="loading-bar"></div>
+                        <div class="loading-bar"></div>
+                        <div class="loading-bar"></div>
+                        <div class="loading-bar"></div>
+                        <div class="loading-bar"></div>
+                        <div class="loading-bar"></div>
+                    </div>
+                    <h1 class="spinner-content">...Loading request...</h1>
+                </div>
+            </div>
+        </div>
+        <div id="loading-bar-full-screen" class="loading-bar-full-screen fixed">
+            <div class="container">
+                <div class="vertical-center">
+                    <div class="signal-display-container">
+                        <div>
+                            <div class="loading-bar-container">
+                                <div class="loading-bar"></div>
+                                <div class="loading-bar"></div>
+                                <div class="loading-bar"></div>
+                                <div class="loading-bar"></div>
+                                <div class="loading-bar"></div>
+                                <div class="loading-bar"></div>
+                            </div>
+                            <div id="full-screen-spinner-content" class="spinner-content">
+                                ...Please wait...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
@@ -166,8 +202,12 @@
                         <div class="panel-body">
                             <form id="jira-form" action="/" method="get">
                                 <div class="row">
-                                    <div class="col-md-3"><input class="form-control form-inline" value="Faiz Mohammed" placeholder="jira user name" type="text" value="" name="user-id" /></div>
-                                    <div class="col-md-3"><input class="form-control form-inline" value="4Update.access!" placeholder="jira password" type="password" value="" name="password" /></div>
+                                    <div class="col-md-3">
+                                        <input class="form-control form-inline" value="Faiz Mohammed" placeholder="jira user name" type="text" value="" name="user-id" />
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input class="form-control form-inline" value="4Update.access!" placeholder="jira password" type="password" value="" name="password" />
+                                    </div>
                                     <div class="col-md-6"></div>
                                 </div>
                                 <hr />
@@ -279,15 +319,16 @@
 
     <script src="../vendor/morrisjs/morris.min.js"></script>
     <!--<script src="../data/morris-data.js"></script>-->
-
     <!-- DataTables JavaScript -->
     <script src="../vendor/datatables/js/jquery.dataTables.min.js"></script>
     <script src="../vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
     <script src="../vendor/datatables-responsive/dataTables.responsive.js"></script>
 
     <!-- Custom Theme JavaScript -->
+    <script src="../dist/js/jquery.cookie.min.js"></script>
     <script src="../dist/js/bootstrap-select.min.js"></script>
     <script src="../dist/js/sb-admin-2.js"></script>
     <script src="../dist/js/jira-custom.min.js"></script>
+    <script src="../dist/js/js-mvc.min.js"></script>
 </body>
 </html>

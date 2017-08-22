@@ -26,9 +26,9 @@
 /// <reference path="../schema/url.js" />
 /// <reference path="../Prototype/Array.js" />
 
-$.app.controllers.loginController = {
+$.app.controllers.indexController = {
     // any thing related to controllers.
-    pageId: "login-page",
+    pageId: "index-page",
     $pageElement: null,
     initialize: function () {
         //anything to config
@@ -45,21 +45,27 @@ $.app.controllers.loginController = {
             /// Refers to the data-action attribute.
             /// </summary>
             /// <returns type=""></returns>
-            var self = $.app.controllers.loginController;
+            var self = $.app.controllers.indexController;
 
             //console.log("Hello from login");
             //console.log(self);
             var jiraCookie = $.cookie('jiraCookie');
-            if (!$.isEmptyObject(jiraCookie)) {
+
+            console.log(self);
+
+
+            if ($.isEmptyObject(jiraCookie)) {
+                $.app.service.redirect.to("/login.html");
+            } else {
                 jiraCookie = JSON.parse(jiraCookie);
-                if (!$.isEmptyObject(jiraCookie.cookie)) {
-                    $.app.service.redirect("/index.html");
+                if ($.isEmptyObject(jiraCookie.cookie)) {
+                    $.app.service.redirect.to("/login.html");
                 }
             }
 
             var $form = $.byId("login-form");
 
-            $form.submit(function(e) {
+            $form.submit(function (e) {
                 e.preventDefault();
                 var values = $form.serializeArray();
                 var pass = $.jsonSearch(values, "name", "password").value;
