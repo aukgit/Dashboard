@@ -18,7 +18,7 @@ module.exports = {
             login = req.session.login;
         }
 
-        return login; //, params: reqParams };
+        return login; //, params:  reqParams };
     },
 
     jiraLoginPost: function (req, reqParams, postData, app, config) {
@@ -45,6 +45,13 @@ module.exports = {
             }
         };
 
+        if (isEmpty(username) || isEmpty(postData.password)) {
+            return {
+                status: "Please pass appropriate username or password. Either probably not present."
+            }
+        }
+
+
         if (isEmpty(req.session.login)) {
             var auth = JSON.parse(deffered(jiraUrlhost, authUrlPath, loginArgs));
             console.log(auth);
@@ -64,24 +71,25 @@ module.exports = {
                     },
                     data: {
                         // Provide additional data for the JIRA search. You can modify the JQL to search for whatever you want.
-                        jql: "type=Bug AND status=Closed"
+                        jql: ""
                     }
                 };
 
                 var login = {};
+                if (!isEmpty(session.name)) {
+                    login.jiraHeader = searchArgs;
+                    login.cookie = cookie;
+                    login.urls = {
+                        jira: jiraUrlhost,
+                        authPath: authUrlPath,
+                        apiPath: apiPath
+                    };
 
-                login.jiraHeader = searchArgs;
-                login.cookie = cookie;
-                login.urls = {
-                    jira: jiraUrlhost,
-                    authPath: authUrlPath,
-                    apiPath: apiPath
-                };
+                    login.userName = username;
+                    login.isLoggedIn = true;
 
-                login.userName = username;
-                login.isLoggedIn = true;
-
-                req.session.login = login;
+                    req.session.login = login;
+                }
             }
         }
 

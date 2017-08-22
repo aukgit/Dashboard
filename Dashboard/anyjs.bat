@@ -1,0 +1,2 @@
+nodemon anyjs.js
+pause;

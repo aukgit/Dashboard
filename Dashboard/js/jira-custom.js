@@ -11,11 +11,16 @@
         ]
     });
 
+    var loggedin = false;
+
+    var server = "http://localhost:8080/api/";
+
     var ids = {
         jiraForm: "jira-form",
         summaryBtn: "summary-btn"
     };
 
+    var loginDetails;
 
     var $form = $("#" + ids.jiraForm);
 
@@ -55,13 +60,6 @@
 
         var jsonString = JSON.stringify(loginArgs);
 
-        var json2 = {
-            "username": "Faiz Mohammed",
-            "password": "4Update.access!"
-        };
-
-        console.log(json2);
-        console.log(jsonString);
 
         //$.ajaxSetup({
         //    beforeSend: function (xhr) {
@@ -69,47 +67,60 @@
         //        xhr.setRequestHeader('Access-Control-Allow-Origin', "*");
         //    }
         //});
-        $.ajax({
-            type: "POST",
-            url: "https://jira.update.com/rest/auth/1/session",
-            data: jsonString,
-            contentType: "application/json",
-            dataType:"json",
-            //xhrFields: {
-            //    // The 'xhrFields' property sets additional fields on the XMLHttpRequest.
-            //    // This can be used to set the 'withCredentials' property.
-            //    // Set the value to 'true' if you'd like to pass cookies to the server.
-            //    // If this is enabled, your server must respond with the header
-            //    // 'Access-Control-Allow-Credentials: true'.
-            //    withCredentials: true
-            //},
-            //headers: {
-            //    // Set any custom headers here.
-            //    // If you set any non-simple headers, your server must include these
-            //    // headers in the 'Access-Control-Allow-Headers' response header.
-            //    "Content-Type": "application/json"
-            //},
 
-            //headers: {
-            //    'Access-Control-Allow-Origin': "*",
-            //    //'Access-Control-Allow-Credentials': true,
-            //    contentType: "application/json"
-            //},
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            success: function (response) {
-                console.log("Success");
-                console.log(response);
-            },
-            error: function (x, e, d) {
-                console.log("Error");
-                console.log(x);
-                console.log(e);
-                console.log(d);
-            }
-        });
+        if (!loggedin) {
+            $.ajax({
+                type: "POST",
+                url: server + "login/jiraLogin",
+                data: jsonString,
+                contentType: "application/json",
+                dataType: "json",
+
+                success: function (response) {
+                    console.log("Success");
+                    console.log(response);
+                    loggedin = response.isLoggedIn;
+                    loginDetails = response;
+                    getJiraResults("status=Closed OR status=Open", loginDetails);
+                },
+                error: function (x, e, d) {
+                    console.log("Error");
+                    console.log(x);
+                    console.log(e);
+                    console.log(d);
+                }
+            });
+        } else {
+            getJiraResults("status=Closed OR status=Open", loginDetails);
+        }
+
+        var getJiraResults = function (jql, login) {
+
+
+            var data = { "jql": jql, login: login };
+
+
+            var dataJsonString = JSON.stringify(data);
+
+            $.ajax({
+                type: "POST",
+                url: server + "jiraQuery",
+                data: dataJsonString,
+                contentType: "application/json",
+                dataType: "json",
+
+                success: function (response) {
+                    console.log(response);
+                },
+                error: function (x, e, d) {
+                    console.log("Error");
+                    console.log(x);
+                    console.log(e);
+                    console.log(d);
+                }
+            });
+        }
+
 
 
     });
