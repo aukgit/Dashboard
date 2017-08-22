@@ -55,11 +55,11 @@ $.app.controllers.indexController = {
 
 
             if ($.isEmptyObject(jiraCookie)) {
-                $.app.service.redirect.to("/login.html");
+                $.app.service.redirect.to("/views/login.html");
             } else {
                 jiraCookie = JSON.parse(jiraCookie);
                 if ($.isEmptyObject(jiraCookie.cookie)) {
-                    $.app.service.redirect.to("/login.html");
+                    $.app.service.redirect.to("/views/login.html");
                 }
             }
 

@@ -45,7 +45,11 @@ $.app.controllers.loginController = {
             /// Refers to the data-action attribute.
             /// </summary>
             /// <returns type=""></returns>
-            var self = $.app.controllers.loginController;
+            var self = $.app.controllers.loginController,
+                consts = $.app.constants,
+                server = consts.server,
+                authPath = consts.authUrlPath,
+                queryPath = consts.queryUrlPath;
 
             //console.log("Hello from login");
             //console.log(self);
@@ -53,20 +57,49 @@ $.app.controllers.loginController = {
             if (!$.isEmptyObject(jiraCookie)) {
                 jiraCookie = JSON.parse(jiraCookie);
                 if (!$.isEmptyObject(jiraCookie.cookie)) {
-                    $.app.service.redirect("/index.html");
+                    $.app.service.redirect.to("/views/index.html");
                 }
             }
 
             var $form = $.byId("login-form");
 
-            $form.submit(function(e) {
+            $form.submit(function (e) {
                 e.preventDefault();
                 var values = $form.serializeArray();
                 var pass = $.jsonSearch(values, "name", "password").value;
                 var user = $.jsonSearch(values, "name", "email").value;
-                console.log(values);
-                console.log(user);
-                console.log(pass);
+
+
+                var loginArgs = {
+                    username: user,
+                    password: pass
+                };
+
+
+                var jsonString = JSON.stringify(loginArgs);
+
+                $.ajax({
+                    type: "POST",
+                    url: server + authPath,
+                    data: jsonString,
+                    contentType: "application/json",
+                    dataType: "json",
+
+                    success: function (response) {
+                        console.log("Success");
+                        console.log(response);
+                        response = JSON.stringify(response);
+                        // $.cookie('jiraCookie', response);
+                        // $.app.service.redirect.to("/views/index.html");
+                    },
+                    error: function (x, e, d) {
+                        console.log("Error");
+                        console.log(x);
+                        console.log(e);
+                        console.log(d);
+                    }
+                });
+          
             });
 
             //console.log($.cookie('name'));
