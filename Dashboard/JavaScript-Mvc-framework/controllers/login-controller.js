@@ -26,9 +26,9 @@
 /// <reference path="../schema/url.js" />
 /// <reference path="../Prototype/Array.js" />
 
-$.app.controllers.homeController = {
+$.app.controllers.loginController = {
     // any thing related to controllers.
-    pageId: "home",
+    pageId: "login-page",
     $pageElement: null,
     initialize: function () {
         //anything to config
@@ -45,9 +45,11 @@ $.app.controllers.homeController = {
             /// Refers to the data-action attribute.
             /// </summary>
             /// <returns type=""></returns>
-            var self = $.app.controllers.homeController,
+            var self = $.app.controllers.loginController,
                 urlSchema = $.app.url.getGeneralUrlSchema(); // pass nothing will give add,edit,save,delete url
-            
+
+            console.log("Hello from login");
+
         }
 
     }

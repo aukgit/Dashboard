@@ -66,11 +66,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\globals.js" />
+    <Content Include="app\jiraQueries.js" />
+    <Content Include="app\jiraQuery.js" />
     <Content Include="app\login.js" />
     <Content Include="app\models\bear.js" />
     <Content Include="data\flot-data.js" />
     <Content Include="data\morris-data.js" />
     <Content Include="dist\css\bootstrap-select.min.css" />
+    <Content Include="dist\css\loader-spinner.min.css" />
     <Content Include="dist\css\sb-admin-2.css" />
     <Content Include="dist\css\sb-admin-2.min.css" />
     <Content Include="dist\js\bootstrap-select.min.js" />
@@ -81,6 +84,7 @@
     <Content Include="index.html" />
     <Content Include="jira-connect.js" />
     <Content Include="js\jira-custom.js" />
+    <Content Include="js\jquery.cookie.js" />
     <Content Include="js\sb-admin-2.js" />
     <Content Include="packages.config" />
     <Content Include="bower.json" />
@@ -88,7 +92,6 @@
     <Content Include="less\sb-admin-2.less" />
     <Content Include="less\variables.less" />
     <Content Include="package.json" />
-    <Content Include="pages\index - Copy.html" />
     <Content Include="server.js" />
     <Content Include="vendor\bootstrap-social\bootstrap-social.less" />
     <Content Include="vendor\bootstrap-social\bootstrap-social.scss" />
@@ -148,19 +151,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="pages\blank.html" />
-    <Content Include="pages\buttons.html" />
-    <Content Include="pages\flot.html" />
-    <Content Include="pages\forms.html" />
-    <Content Include="pages\grid.html" />
-    <Content Include="pages\icons.html" />
-    <Content Include="pages\index.html" />
-    <Content Include="pages\login.html" />
-    <Content Include="pages\morris.html" />
-    <Content Include="pages\notifications.html" />
-    <Content Include="pages\panels-wells.html" />
-    <Content Include="pages\tables.html" />
-    <Content Include="pages\typography.html" />
     <Content Include="vendor\bootstrap-social\bootstrap-social.css" />
     <Content Include="vendor\bootstrap\css\bootstrap.css" />
     <Content Include="vendor\bootstrap\css\bootstrap.min.css" />
@@ -250,6 +240,9 @@
     <Content Include="vendor\morrisjs\morris.min.js" />
     <Content Include="vendor\raphael\raphael.js" />
     <Content Include="vendor\raphael\raphael.min.js" />
+    <Content Include="views\blank.html" />
+    <Content Include="views\index.html" />
+    <Content Include="views\login.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

@@ -70,7 +70,8 @@ gulp.task("js-mvc",
             "JavaScript-Mvc-framework/app/extensions/*.js",
             "JavaScript-Mvc-framework/app/controllers/*.js",
             "JavaScript-Mvc-framework/app/component/*.js",
-            "JavaScript-Mvc-framework/app/events/*.js"
+            "JavaScript-Mvc-framework/app/events/*.js",
+            "JavaScript-Mvc-framework/app.run.js"
  
         ];
 

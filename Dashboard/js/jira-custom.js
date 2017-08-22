@@ -1,7 +1,7 @@
 ﻿$(function () {
-    $("#summary-table").DataTable({
-        responsive: true
-    });
+    //$("#summary-table").DataTable({
+    //    responsive: true
+    //});
     Morris.Donut({
         element: "morris-donut-chart",
         data: [
