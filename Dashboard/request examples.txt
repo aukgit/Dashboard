@@ -1,0 +1,26 @@
+POST /api/jiraQueries HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+Cache-Control: no-cache
+Postman-Token: 3bc7c932-f452-5927-3830-bbc6e69244c9
+
+{
+	"jqls": [
+	"project = BREN AND status in (Resolved, Closed) AND resolved >= 2017-08-01 AND resolved <= 2017-08-31", 
+	"project = BREN AND status in (Open)",
+	"project = BREN AND status in (Closed)",
+	"project = BREN AND status in (Resolved, Closed) AND resolved >= 2017-08-01 AND resolved <= 2017-08-31"
+	],
+	"additionalJiraFilters" : {
+		"maxResults": 1
+	},
+	"filterFields": ["total"]
+}
+
+POST /api/login/jiraLogin HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+Cache-Control: no-cache
+Postman-Token: dfa8ed51-676f-d555-5180-29213ffa6fba
+
+{"username":"Faiz Mohammed","password":"4Update.access!"}

@@ -12,7 +12,8 @@ module.exports = {
             login = postData.login,
             jqls = postData.jqls,
             limit = postData["limit"],
-            filterFields = postData.filterFields;
+            filterFields = postData.filterFields,
+            additionalJiraFilters = postData.additionalJiraFilters;
 
 
         //console.log(postData);
@@ -21,6 +22,16 @@ module.exports = {
         var getJiraResultsPromise = function (loginx, jql, limit, callBack) {
             var jiraHeader = loginx.jiraHeader;
             jiraHeader.data.jql = jql;
+
+            if (!isEmpty(additionalJiraFilters)) {
+                for (var filter in additionalJiraFilters) {
+                    if (additionalJiraFilters.hasOwnProperty(filter)) {
+                        jiraHeader.data[filter] = additionalJiraFilters[filter];
+                    }
+                }
+            }
+
+            console.log(jiraHeader.data);
 
             if (isEmpty(limit)) {
                 limit = -1;

@@ -64,3 +64,4 @@ rc.entry(master, { 'childTest': childTest,
  
 // Or define leave the default number of workers to # of cpu cores
 // rc.entry(master, { 'childTest': childTest, 'childTest$': childTest$ });
+ 
