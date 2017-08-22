@@ -89,8 +89,8 @@ $.app.controllers.loginController = {
                         console.log("Success");
                         console.log(response);
                         response = JSON.stringify(response);
-                        // $.cookie('jiraCookie', response);
-                        // $.app.service.redirect.to("/views/index.html");
+                        $.cookie('jiraCookie', response);
+                        $.app.service.redirect.to("/views/index.html");
                     },
                     error: function (x, e, d) {
                         console.log("Error");
