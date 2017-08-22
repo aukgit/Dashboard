@@ -148,7 +148,7 @@ module.exports = {
         }
 
         if (isEmpty(checkDurationInMilisec)) {
-            checkDurationInMilisec = 150;
+            checkDurationInMilisec = 4;
         }
 
         console.log("---------------- [Start] New Request at : " + hostName + path + "---------------------");

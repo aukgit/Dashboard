@@ -1,3 +1,2 @@
 
-npm install npm-install-all -g
-npm-install-all server.js
+npm-install-all anyjs.js

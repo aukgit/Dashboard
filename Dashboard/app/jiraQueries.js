@@ -70,7 +70,7 @@ module.exports = {
 
 
             while (resultsProcessed < jqls.length) {
-                sleep(100);
+                sleep(10);
             }
 
             return combinedResults;
