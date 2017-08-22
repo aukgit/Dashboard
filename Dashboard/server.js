@@ -13,6 +13,7 @@ var url = config.env.urls[config.env.current] + ":" + apiPort;
 var request = require('request');
 var session = require('express-session');
 var uuidv1 = require('uuid/v1');
+var cors = require('cors');
 
 var sess = {
     genid: function () {
@@ -30,6 +31,7 @@ if(app.get('env') === 'production') {
 }
 
 app.use(session(sess));
+app.use(cors());
 
 var isEmpty = function (o) {
     return o === null || o === undefined;

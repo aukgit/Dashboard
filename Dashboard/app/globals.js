@@ -29,7 +29,7 @@ module.exports = {
         if (isEmpty(checkDurationInMilisec)) {
             checkDurationInMilisec = 250;
         }
-        console.log("executing : ");
+        console.log("---------------- [Start] New Request at : " + hostName + path + "---------------------");
 
         var req2 = https.request(options,
             function (resp) {
@@ -49,6 +49,7 @@ module.exports = {
                 resp.on("end", function () {
                     result = results.join("");
                     //console.log("done reading");
+                    console.log("---------------- [End] at : " + hostName + path + " with " + resp.statusCode + "---------------------");
                     return result;
                 });
                 //resp.pipe(process.stdout);

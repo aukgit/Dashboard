@@ -31,13 +31,13 @@ module.exports = {
             deffered = globals.defferedClientPost;
 
 
-
-
         var username = postData.username,
             pass = postData.password,
             jiraUrlhost = config.jiraUrl,
             authUrlPath = config.authUrl,
             apiPath = config.jiraApiUrl;
+
+
         var loginArgs = {
             data: {
                 "username": username,
@@ -45,32 +45,54 @@ module.exports = {
             }
         };
 
-        var auth = JSON.parse(deffered(jiraUrlhost, authUrlPath, loginArgs));
-        console.log(auth);
+        if (isEmpty(req.session.login)) {
+            var auth = JSON.parse(deffered(jiraUrlhost, authUrlPath, loginArgs));
+            console.log(auth);
 
-        if (auth !== null) {
-            console.log("Auth not empty");
-            var session = auth.session;
+            if (auth !== null) {
+                console.log("Auth not empty");
+                var session = auth.session;
 
-            console.log(auth.session);
+                var cookie = session.name + '=' + session.value;
 
-            var searchArgs = {
-                headers: {
-                    // Set the xcookie from the session information
-                    cookie: session.name + '=' + session.value
-                },
-                data: {
-                    // Provide additional data for the JIRA search. You can modify the JQL to search for whatever you want.
-                    jql: "type=Bug AND status=Closed"
-                }
-            };
+                console.log(auth.session);
 
-            var bugs = deffered(jiraUrlhost, apiPath, searchArgs);
+                var searchArgs = {
+                    headers: {
+                        // Set the xcookie from the session information
+                        cookie: cookie
+                    },
+                    data: {
+                        // Provide additional data for the JIRA search. You can modify the JQL to search for whatever you want.
+                        jql: "type=Bug AND status=Closed"
+                    }
+                };
 
-            console.log(bugs);
+                var login = {};
 
-            return bugs;
+                login.jiraHeader = searchArgs;
+                login.cookie = cookie;
+                login.urls = {
+                    jira: jiraUrlhost,
+                    authPath: authUrlPath,
+                    apiPath: apiPath
+                };
 
+                login.userName = username;
+                login.isLoggedIn = true;
+
+                req.session.login = login;
+            }
+        }
+
+        if (!isEmpty(req.session.login) && req.session.login["isLoggedIn"] === true) {
+
+            console.log("already logged in.");
+            // var bugs = deffered(jiraUrlhost, apiPath, req.session.login.jiraHeader);
+
+            //console.log(bugs);
+
+            return req.session.login;
         }
 
 
