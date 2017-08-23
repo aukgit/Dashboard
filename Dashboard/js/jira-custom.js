@@ -16,8 +16,8 @@
     var server = "http://localhost:8080/api/";
 
     var ids = {
-        jiraForm: "jira-form",
-        summaryBtn: "summary-btn"
+        jiraForm: "jira-formxx",
+        summaryBtn: "summary-btnxx"
     };
 
     var loginDetails;

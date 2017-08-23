@@ -93,10 +93,11 @@ $.app.controllers.loginController = {
                         $.app.service.redirect.to("/views/index.html");
                     },
                     error: function (x, e, d) {
-                        console.log("Error");
-                        console.log(x);
-                        console.log(e);
-                        console.log(d);
+                        //console.log("Error");
+                        //console.log(x);
+                        //console.log(e);
+                        //console.log(d);
+                        alert("Please run the API server, cannot login to the jira or probably credentials are wrong.");
                     }
                 });
           

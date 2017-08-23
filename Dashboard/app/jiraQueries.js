@@ -16,7 +16,7 @@ module.exports = {
             additionalJiraFilters = postData.additionalJiraFilters;
 
 
-        //console.log(postData);
+        console.log(postData);
         //console.log(jqls);
 
         var getJiraResultsPromise = function (loginx, jql, limit, callBack) {

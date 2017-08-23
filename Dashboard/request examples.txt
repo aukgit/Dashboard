@@ -24,3 +24,6 @@ Cache-Control: no-cache
 Postman-Token: dfa8ed51-676f-d555-5180-29213ffa6fba
 
 {"username":"Faiz Mohammed","password":"4Update.access!"}
+
+Faiz Mohammed
+4Update.access!
