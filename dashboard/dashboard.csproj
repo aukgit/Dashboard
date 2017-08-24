@@ -71,17 +71,16 @@
     <Content Include="app\login.js" />
     <Content Include="data\flot-data.js" />
     <Content Include="data\morris-data.js" />
-    <Content Include="dist\css\animate.min.css" />
-    <Content Include="dist\css\bootstrap-select.min.css" />
-    <Content Include="dist\css\loader-spinner.min.css" />
-    <Content Include="dist\css\sb-admin-2.css" />
-    <Content Include="dist\css\sb-admin-2.min.css" />
-    <Content Include="dist\js\bootstrap-select.min.js" />
-    <Content Include="dist\js\jira-custom.min.js" />
-    <Content Include="dist\js\jquery.cookie.min.js" />
-    <Content Include="dist\js\js-mvc.min.js" />
-    <Content Include="dist\js\sb-admin-2.js" />
-    <Content Include="dist\js\sb-admin-2.min.js" />
+    <Content Include="dist\css\all-styles-compiled.min.css" />
+    <Content Include="dist\fonts\fontawesome-webfont.svg" />
+    <Content Include="dist\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="dist\images\favicon.ico" />
+    <Content Include="dist\images\sort_asc.png" />
+    <Content Include="dist\images\sort_asc_disabled.png" />
+    <Content Include="dist\images\sort_both.png" />
+    <Content Include="dist\images\sort_desc.png" />
+    <Content Include="dist\images\sort_desc_disabled.png" />
+    <Content Include="dist\js\all-scripts-compiled.min.js" />
     <Content Include="gulpfile.js" />
     <Content Include="index.html" />
     <Content Include="JavaScript-Mvc-framework\app.js" />
@@ -124,14 +123,22 @@
     <Content Include="JavaScript-Mvc-framework\service\redirect.js" />
     <Content Include="JavaScript-Mvc-framework\service\user.js" />
     <Content Include="jira-connect.js" />
-    <Content Include="js\jira-custom.js" />
-    <Content Include="js\jquery.cookie.js" />
-    <Content Include="js\sb-admin-2.js" />
+    <Content Include="dist\fonts\fontawesome-webfont.eot" />
+    <Content Include="dist\fonts\fontawesome-webfont.ttf" />
+    <Content Include="dist\fonts\fontawesome-webfont.woff" />
+    <Content Include="dist\fonts\fontawesome-webfont.woff2" />
+    <Content Include="dist\fonts\FontAwesome.otf" />
+    <Content Include="dist\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="dist\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="dist\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="dist\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="dist\images\Sorting icons.psd" />
+    <None Include="less\loader-spinner.less" />
     <Content Include="packages.config" />
     <Content Include="bower.json" />
-    <Content Include="less\mixins.less" />
+    <Content Include="less\includes\mixins.less" />
     <Content Include="less\sb-admin-2.less" />
-    <Content Include="less\variables.less" />
+    <Content Include="less\includes\variables.less" />
     <Content Include="package.json" />
     <Content Include="server.js" />
     <Content Include="LICENSE" />
@@ -143,6 +150,28 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="source-css\footer\utilities.min.css" />
+    <Content Include="source-css\from-less\loader-spinner.css" />
+    <Content Include="source-css\from-less\sb-admin-2.css" />
+    <Content Include="source-css\header\lumen.bootstrap.min.css" />
+    <Content Include="source-css\vendor\animate.min.css" />
+    <Content Include="source-css\vendor\bootstrap-select.min.css" />
+    <Content Include="source-css\vendor\dataTables.bootstrap.css" />
+    <Content Include="source-css\vendor\dataTables.responsive.css" />
+    <Content Include="source-css\vendor\font-awesome.min.css" />
+    <Content Include="source-css\vendor\metisMenu.min.css" />
+    <Content Include="source-css\vendor\morris.css" />
+    <Content Include="source-js\dataTables.bootstrap.js" />
+    <Content Include="source-js\vendor\jquery.dataTables.min.js" />
+    <Content Include="source-js\header\jquery.min.js" />
+    <Content Include="source-js\jquery.cookie.js" />
+    <Content Include="source-js\js-mvc.min.js" />
+    <Content Include="source-js\sb-admin-2.js" />
+    <Content Include="source-js\vendor\bootstrap-select.min.js" />
+    <Content Include="source-js\footer\dataTables.responsive.js" />
+    <Content Include="source-js\vendor\jquery.cookie.min.js" />
+    <Content Include="source-js\vendor\metisMenu.min.js" />
+    <Content Include="source-js\vendor\morris.min.js" />
     <Content Include="views\index.html" />
     <Content Include="views\login.html" />
     <Content Include="Web.config" />
@@ -151,7 +180,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="app\views\" />
+    <Folder Include="source-css\css\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
