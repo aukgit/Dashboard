@@ -11,26 +11,42 @@ $.app.executeBefore = {
     /**
      * runs all the methods after initialize method.
      */
-    //toasterComponentSetup: function () {
-    //    if (!$.isEmpty(toastr)) {
-    //        toastr.options = {
-    //            "closeButton": false,
-    //            "debug": false,
-    //            "newestOnTop": true,
-    //            "progressBar": true,
-    //            "positionClass": "toast-bottom-left",
-    //            "preventDuplicates": true,
-    //            "showDuration": "300",
-    //            "hideDuration": "1000",
-    //            "timeOut": "5000",
-    //            "extendedTimeOut": "1000",
-    //            "showEasing": "swing",
-    //            "hideEasing": "linear",
-    //            "showMethod": "fadeIn",
-    //            "hideMethod": "fadeOut"
-    //        }
-    //    }
-    //},
+    toasterComponentSetup: function () {
+        if (!$.isEmpty(toastr)) {
+            //toastr.options = {
+            //    "closeButton": false,
+            //    "debug": false,
+            //    "newestOnTop": true,
+            //    "progressBar": true,
+            //    "positionClass": "toast-bottom-left",
+            //    "preventDuplicates": true,
+            //    "showDuration": "300",
+            //    "hideDuration": "1000",
+            //    "timeOut": "5000",
+            //    "extendedTimeOut": "1000",
+            //    "showEasing": "swing",
+            //    "hideEasing": "linear",
+            //    "showMethod": "fadeIn",
+            //    "hideMethod": "fadeOut"
+            //}
+            toastr.options = {
+                "closeButton": false,
+                "debug": true,
+                "newestOnTop": true,
+                "progressBar": true,
+                "positionClass": "toast-top-full-width",
+                "preventDuplicates": true,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "3000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
+        }
+    },
     //dynamicDependedCombo: function () {
     //    // load dynamic and depended select or combo
     //    var $selectPickers = $(".selectpicker");

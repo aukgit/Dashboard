@@ -77,7 +77,10 @@ $.app.controllers.loginController = {
 
 
                 var jsonString = JSON.stringify(loginArgs);
+                // message, $blockingElement, $elementToHide, onBlockExecuteMethod;
+                // toastr["error"]("Sorry couldn't reach API server or login failed. Please try to run the server first.");
 
+                $.app.global.documentFullSpinnerShow("... Requesting for login ...");
                 $.ajax({
                     type: "POST",
                     url: server + authPath,
@@ -97,10 +100,17 @@ $.app.controllers.loginController = {
                         //console.log(x);
                         //console.log(e);
                         //console.log(d);
-                        alert("Please run the API server, cannot login to the jira or probably credentials are wrong.");
+                        //alert("Please run the API server, cannot login to the jira or probably credentials are wrong.");
+                        toastr["error"](
+                            "Sorry couldn't reach API server or login failed. Please try to run the server first. Please try to run the API server againa nd try agian.");
                     }
-                });
-          
+                }).always(function () {
+                    // alert("complete");
+                    $.app.global.documentFullSpinnerHide();
+                });;
+
+
+
             });
 
             //console.log($.cookie('name'));

@@ -165,8 +165,14 @@ body {
   height: 350px;
   overflow-y: scroll;
 }
-.login-panel {
-  margin-top: 25%;
+#login-page {
+  height: 100%;
+}
+.login-panel-wrapper {
+  margin-top: 45%;
+}
+.login-panel-wrapper h1 {
+  text-align: center;
 }
 .flot-chart {
   display: block;

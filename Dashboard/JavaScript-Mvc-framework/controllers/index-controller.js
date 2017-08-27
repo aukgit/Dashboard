@@ -165,6 +165,7 @@ $.app.controllers.indexController = {
                 });
 
                 $barchartPanel.show();
+                $.byId("morris-bar-chart").empty();
                 Morris.Bar({
                     element: 'morris-bar-chart',
                     data: datasets,
@@ -175,8 +176,14 @@ $.app.controllers.indexController = {
             }
 
             var getJiraResults = function (project, login) {
+                /// <summary>
+                /// Request each company wise JQL reqeust to NODEJS api server.
+                /// </summary>
+                /// <param name="project">Send a project type JSON , type of Project from Constants</param>
+                /// <param name="login">Login json data from cookie. Extract cookie and then parse it to JSON and then send it here.</param>
 
 
+                // each company JQL json format.
                 var data = {
                     "jqls": project.jqls,
                     "login": login,
@@ -203,13 +210,6 @@ $.app.controllers.indexController = {
                         // console.log(project);
                         // console.log(projectsListInstance);
                         requestsCompleted += 1;
-                        console.log("Req completed :" + requestsCompleted + " out of " + projectsListInstance.length);
-
-                        if (requestsCompleted >= projectsListInstance.length) {
-                            console.log("triggering render");
-                            processProjectDataIntoTable(projectsListInstance);
-                        }
-
                     },
                     error: function (x, e, d) {
                         //console.log("Error");
@@ -217,7 +217,18 @@ $.app.controllers.indexController = {
                         //console.log(e);
                         //console.log(d);
 
-                        alert("error");
+                        //alert("error");
+                        toastr["error"]("Sorry failed to load data from NodeJS server.");
+                    }
+                }).always(function () {
+
+                    $.app.global.documentFullSpinnerShow("... Loaded " + requestsCompleted + " Project(s) Successfully ...");
+                    console.log("Req completed :" + requestsCompleted + " out of " + projectsListInstance.length);
+                    if (requestsCompleted >= projectsListInstance.length) {
+                        // console.log("triggering render");
+                        processProjectDataIntoTable(projectsListInstance);
+                        toastr["success"]("Everything loaded successfully.");
+                        $.app.global.documentFullSpinnerHide();
                     }
                 });
             }
@@ -230,13 +241,13 @@ $.app.controllers.indexController = {
 
                 requestsCompleted = 0;
 
-                var values = $form.serializeArray();
+                // var values = $form.serializeArray();
                 var selectedMonth = parseFloat($monthSelect.selectpicker('val')) + 1;
                 var dates = getFirstAndLastDate(selectedMonth);
                 // console.log(dates);
 
 
-                alert("Processing the request ! Please wait");
+                //alert("Processing the request ! Please wait");
 
                 projectsListInstance = [];
                 //var jqlList = [];
@@ -245,6 +256,8 @@ $.app.controllers.indexController = {
                 var dateQuery = " AND resolved >= " + dates.firstDay + " AND resolved <= " + dates.lastDay;
                 // console.log(dateQuery);
 
+
+                $.app.global.documentFullSpinnerShow("... Requsting to NodeJS ...");
 
                 for (var j = 0; j < projects.length; j++) {// 1; j++) {//
                     var project = projects[j],
@@ -267,6 +280,7 @@ $.app.controllers.indexController = {
 
                     projectsListInstance.push(project);
 
+                    $.app.global.documentFullSpinnerShow("... Requsting " + j + " Project(s) ...");
                 }
 
                 //var interval = setInterval(function () {
