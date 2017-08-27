@@ -161,7 +161,8 @@ $.app.controllers.indexController = {
                 console.log($templateTable.html());
                 $placeHolder.empty().append($templateTable);
                 $.byId("summary-table").DataTable({
-                    responsive: true
+                    responsive: true,
+                    paging: false
                 });
 
                 $barchartPanel.show();
