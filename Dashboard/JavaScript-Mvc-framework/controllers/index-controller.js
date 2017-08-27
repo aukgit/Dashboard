@@ -52,6 +52,9 @@ $.app.controllers.indexController = {
                 projects = consts.jiraProjects,
                 queryPath = consts.queryUrlPath;
 
+
+            var compiledDataset = [];
+
             var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
             var $barchartPanel = $.byId("barchart-panel");
@@ -135,16 +138,28 @@ $.app.controllers.indexController = {
             var processProjectDataIntoTable = function () {
                 var tableHtml = [];
                 var datasets = [];
+                /**
+                 * a.  Total # of JIRAs Delivered = 0
+                 * c.  # of JIRAs Delivered without reopening = 1
+                 * b.  # of JIRAs reopened due to Communication Gaps =2
+                 * d.  # of JIRAs delivered and reopened for a Delta requirement =3
+                 * e.  # of JIRAs delivered with defects = 4
+                 * f.  # of JIRAs with quality issues in Product, Legacy or Bugs Post Warranty = 5
+                 */
                 console.log(projectsListInstance);
                 for (var j = 0; j < projectsListInstance.length; j++) {
                     var projectw = projectsListInstance[j],
                         title = projectw.projectsDisplayName,
                         results = projectw.results,
-                        resolvedJiras = results[0].total,
-                        communicationGap = results[1].total - results[2].total,
-                        deltaJiras = results[2].total,
-                        cells = [title, resolvedJiras, communicationGap, deltaJiras],
-                        chartRow = { y: title, a: resolvedJiras, b: communicationGap, c: deltaJiras },
+                        resolvedJiras = parseFloat(results[0].total),
+                        reOpened = parseFloat(results[1].total),
+                        resolvedWithoutReOpen = resolvedJiras - reOpened,
+                        communicationGap = parseFloat(results[2].total),
+                        delta = parseFloat(results[3].total),
+                        defects = parseFloat(results[4].total),
+                        bugs = parseFloat(results[5].total),
+                        cells = [title, resolvedJiras, resolvedWithoutReOpen, communicationGap, delta, defects, bugs],
+                        chartRow = { y: title, a: resolvedJiras, b: resolvedWithoutReOpen, c: communicationGap, d: delta, e: defects, f: bugs },
                         row = formRow(cells);
                     console.log(cells);
                     console.log(row);
@@ -152,6 +167,7 @@ $.app.controllers.indexController = {
                     tableHtml.push(row);
                 }
 
+                compiledDataset = datasets;
                 var htmlString = tableHtml.join("");
 
                 var $templateTable = $.byId("table-template").clone().attr('id', 'summary-table');
@@ -162,7 +178,11 @@ $.app.controllers.indexController = {
                 $placeHolder.empty().append($templateTable);
                 $.byId("summary-table").DataTable({
                     responsive: true,
-                    paging: false
+                    paging: false,
+                    dom: 'Bfrtip',
+                    buttons: [
+                        'copy', 'csv', 'excel', 'print'
+                    ]
                 });
 
                 $barchartPanel.show();
@@ -171,8 +191,8 @@ $.app.controllers.indexController = {
                     element: 'morris-bar-chart',
                     data: datasets,
                     xkey: 'y',
-                    ykeys: ['a', 'b', 'c'],
-                    labels: ['Resolved Jiras', 'jiras open due to communication gap', 'jiras open due to defects/bugs/delta requirements']
+                    ykeys: ['a', 'b', 'c', 'd', 'e', 'f'],
+                    labels: ['Resolved Jiras', 'Resolve without ReOpen', 'ReOpen : Communication Gap', 'ReOpen : defects', , 'ReOpen : Delta', 'ReOpen : Bugs, Legacy']
                 });
             }
 
@@ -194,7 +214,7 @@ $.app.controllers.indexController = {
                     "filterFields": ["total"]
                 };
 
-
+                console.log(data.jqls);
                 var dataJsonString = JSON.stringify(data);
 
                 $.ajax({
@@ -243,8 +263,13 @@ $.app.controllers.indexController = {
                 requestsCompleted = 0;
 
                 // var values = $form.serializeArray();
+                var currentMonthIndex = d.getMonth() + 1;
                 var selectedMonth = parseFloat($monthSelect.val()) + 1;
                 console.log(selectedMonth);
+                if (selectedMonth > currentMonthIndex) {
+                    toastr["error"]("Sorry your selected month is in future.");
+                    return;
+                }
                 var dates = getFirstAndLastDate(selectedMonth);
                 // console.log(dates);
 

@@ -13,11 +13,11 @@
         **/
         " AND status in (Resolved, Closed)", //  AND resolved >= @D1 AND resolved <= @D2, resolved >= 2017-08-01 AND resolved <= 2017-08-31
         " AND status in (Reopened)", // all reopen  || project in (@ProjectName)
-        " AND status in (Reopened) AND  \"Reopened Reason\" in (\"Communication Gaps\"", // all reopen  || project in (@ProjectName)
+        " AND status in (Reopened) AND  \"Reopened Reason\" in (\"Communication Gaps\") ", // all reopen  || project in (@ProjectName)
         " AND status in (Reopened) AND  \"Reopened Reason\" in (\"Delta Requirements\") ", // all reopen  || project in (@ProjectName)
         " AND status in (Reopened) AND  \"Reopened Reason\" in (Defects) ", // all reopen  || project in (@ProjectName)
         " AND status in (Reopened) AND  \"Reopened Reason\" in (\"Communication Gaps\", Defects, \"Delta Requirements\") ", // all reopen  || project in (@ProjectName)
-        " AND status in (Reopened) AND \"Defect Type\" in (\"Defect Post Warranty\", \"Legacy Defect\", \"Product Defect\")",
+        " AND status in (Reopened) AND \"Defect Type\" in (\"Defect Post Warranty\", \"Legacy Defect\", \"Product Defect\")"
     ],
     jiraProjects: [
         {
