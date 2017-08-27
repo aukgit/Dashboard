@@ -92,6 +92,7 @@ gulp.task("minify-js", ["js-mvc"],
         var files = [
             "source-js/header/*.js",
             "source-js/vendor/*.js",
+			"source-js/vendor/database.plugins/*.js",
             "source-js/*.js",
             "source-js/footer/*.js"
         ];
