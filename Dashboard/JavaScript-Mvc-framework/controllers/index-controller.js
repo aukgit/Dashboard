@@ -83,8 +83,8 @@ $.app.controllers.indexController = {
 
             //console.log(quriesTemplate);
             //console.log(projects);
-
-            $monthSelect.selectpicker('val', monthIndex);
+            //$monthSelect.selectpicker();
+            //$monthSelect.selectpicker('val', monthIndex);
 
             var jiraCookie = $.cookie('jiraCookie');
 
@@ -243,7 +243,8 @@ $.app.controllers.indexController = {
                 requestsCompleted = 0;
 
                 // var values = $form.serializeArray();
-                var selectedMonth = parseFloat($monthSelect.selectpicker('val')) + 1;
+                var selectedMonth = parseFloat($monthSelect.val()) + 1;
+                console.log(selectedMonth);
                 var dates = getFirstAndLastDate(selectedMonth);
                 // console.log(dates);
 
