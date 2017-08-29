@@ -147,17 +147,26 @@ $.app.controllers.indexController = {
                  * f.  # of JIRAs with quality issues in Product, Legacy or Bugs Post Warranty = 5
                  */
                 console.log(projectsListInstance);
+
+                var indexes = {
+                    resolved: 0,
+                    communication: 1,
+                    delta: 2,
+                    defects: 3,
+                    bugs: 4
+
+                }
+
                 for (var j = 0; j < projectsListInstance.length; j++) {
                     var projectw = projectsListInstance[j],
                         title = projectw.projectsDisplayName,
                         results = projectw.results,
-                        resolvedJiras = parseFloat(results[0].total),
-                        reOpened = parseFloat(results[1].total),
-                        resolvedWithoutReOpen = resolvedJiras - reOpened,
-                        communicationGap = parseFloat(results[2].total),
-                        delta = parseFloat(results[3].total),
-                        defects = parseFloat(results[4].total),
-                        bugs = parseFloat(results[5].total),
+                        resolvedJiras = parseFloat(results[indexes.resolved].total),
+                        communicationGap = parseFloat(results[indexes.communication].total),
+                        delta = parseFloat(results[indexes.delta].total),
+                        defects = parseFloat(results[indexes.defects].total),
+                        bugs = parseFloat(results[indexes.delta].total),
+                        resolvedWithoutReOpen = resolvedJiras - communicationGap - delta - defects - bugs,
                         cells = [title, resolvedJiras, resolvedWithoutReOpen, communicationGap, delta, defects, bugs],
                         chartRow = { y: title, a: resolvedJiras, b: resolvedWithoutReOpen, c: communicationGap, d: delta, e: defects, f: bugs },
                         row = formRow(cells);
