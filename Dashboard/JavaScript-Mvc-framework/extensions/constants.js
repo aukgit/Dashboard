@@ -15,8 +15,7 @@
         //" ", // all reopen  || project in (@ProjectName)
         " AND \"Reopened Reason\" in (\"Communication Gaps\") ", // all reopen  || project in (@ProjectName)
         " AND \"Reopened Reason\" in (\"Delta Requirements\") ", // all reopen  || project in (@ProjectName)
-        " AND \"Reopened Reason\" in (Defects) ", // all reopen  || project in (@ProjectName)
-        " AND \"Reopened Reason\" in (\"Communication Gaps\", Defects, \"Delta Requirements\") ", // all reopen  || project in (@ProjectName)
+        " AND \"Reopened Reason\" in (Defects) ", // all reopen  || project in (@ProjectName)        
         " AND \"Defect Type\" in (\"Defect Post Warranty\", \"Legacy Defect\", \"Product Defect\")"
     ],
     jiraProjects: [
@@ -29,7 +28,7 @@
             projectsDisplayName: "Brenntag"
         },
         {
-            projectsId: "EVA, EVBS",
+            projectsId: "EVA, EVM, EVBS, EP, ECR",
             projectsDisplayName: "Evobus"
         },
         {
@@ -41,7 +40,7 @@
             projectsDisplayName: "GBO"
         },
         {
-            projectsId: "SGG, SGH, SGC, SGP, SAN",
+            projectsId: "SGG, SGC", // SGG, SGH, SGC, SGP, SAN
             projectsDisplayName: "Saint Gobain"
         },
         {
@@ -57,7 +56,7 @@
             projectsDisplayName: "STK"
         },
         {
-            projectsId: "BREN",
+            projectsId: "RIS",
             projectsDisplayName: "RISO"
         },
         {

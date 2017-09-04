@@ -2,6 +2,8 @@
 //npm-install-all server.js
 //npm install -g gulpfile-install
 // gulpfile-install gulpfile.js
+npm install gulp -g
+npm install gulp -D
 npm install system-sleep
 npm install gulp-less
 npm install browser-sync

@@ -99,7 +99,7 @@ gulp.task("minify-js", ["js-mvc"],
 
         return gulp.src(files)
             .pipe(concat("all-scripts-compiled.js"))
-            //.pipe(uglify())
+            .pipe(uglify())
             .pipe(rename({ suffix: ".min" }))
             .pipe(gulp.dest("dist/js"))
             .pipe(browserSync.reload({

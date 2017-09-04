@@ -109,10 +109,16 @@ $.app.controllers.indexController = {
 
             var $form = $.byId("jira-form");
 
+            function lastDayOfMonth(Year, Month) {
+                return new Date((new Date(Year, Month, 1)) - 1);
+            }
+
             var getFirstAndLastDate = function (selectedMonth) {
                 var date = new Date(), y = date.getFullYear(), m = selectedMonth;
                 var firstDay = y + "-" + m + "-" + new Date(y, m, 1).getDate();
-                var lastDay = y + "-" + m + "-" + new Date(y, m + 1, 0).getDate();
+                var lastDay = y + "-" + m + "-" + lastDayOfMonth(y, selectedMonth).getDate();
+
+
 
                 return {
                     firstDay: firstDay,
@@ -154,7 +160,6 @@ $.app.controllers.indexController = {
                     delta: 2,
                     defects: 3,
                     bugs: 4
-
                 }
 
                 for (var j = 0; j < projectsListInstance.length; j++) {
@@ -165,13 +170,14 @@ $.app.controllers.indexController = {
                         communicationGap = parseFloat(results[indexes.communication].total),
                         delta = parseFloat(results[indexes.delta].total),
                         defects = parseFloat(results[indexes.defects].total),
-                        bugs = parseFloat(results[indexes.delta].total),
+                        bugs = parseFloat(results[indexes.bugs].total),
                         resolvedWithoutReOpen = resolvedJiras - communicationGap - delta - defects - bugs,
                         cells = [title, resolvedJiras, resolvedWithoutReOpen, communicationGap, delta, defects, bugs],
                         chartRow = { y: title, a: resolvedJiras, b: resolvedWithoutReOpen, c: communicationGap, d: delta, e: defects, f: bugs },
                         row = formRow(cells);
-                    console.log(cells);
-                    console.log(row);
+                    //console.log(cells);
+                    // console.log(row);
+                    console.log(results);
                     datasets.push(chartRow);
                     tableHtml.push(row);
                 }
@@ -301,7 +307,6 @@ $.app.controllers.indexController = {
                         projectQuery = "project in (" + projectId + ") ";
 
                     project.jqls = [];
-
                     for (var k = 0; k < quriesTemplate.length; k++) {//quriesTemplate.length; k++) {
                         var query = projectQuery + quriesTemplate[k] + dateQuery;
                         // console.log(query);
@@ -312,6 +317,7 @@ $.app.controllers.indexController = {
                     // console.log("starting : " + projectId);
                     // console.log(project);
 
+                    console.log(project.jqls );
                     getJiraResults(project, login);
 
                     projectsListInstance.push(project);
