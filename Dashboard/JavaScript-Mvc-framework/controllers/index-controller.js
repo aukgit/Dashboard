@@ -69,10 +69,12 @@ $.app.controllers.indexController = {
             //console.log("Hello from login");
             //console.log(self);
 
+            var $yearSelect = $("#year-select");
             var $monthSelect = $.byId("month-select");
 
             var options = [];
-            for (var i = 0; i < months.length; i++) {
+            var i;
+            for (i = 0; i < months.length; i++) {
                 var selected = '';
                 if (monthIndex === i) {
                     selected = "selected";
@@ -82,6 +84,19 @@ $.app.controllers.indexController = {
 
             $monthSelect.append(options.join(""));
 
+            options = [];
+
+            for (i = -20; i < 2; i++) {
+                var selected = '';
+                var year = parseFloat(d.getFullYear()) + i;
+
+                if (year === d.getFullYear()) {
+                    selected = "selected";
+                }
+                options.push("<option value='" + year + "' " + selected + " >" + year + "</option>");
+            }
+
+            $yearSelect.append(options.join(""));
 
 
             //console.log(quriesTemplate);
@@ -113,8 +128,8 @@ $.app.controllers.indexController = {
                 return new Date((new Date(Year, Month, 1)) - 1);
             }
 
-            var getFirstAndLastDate = function (selectedMonth) {
-                var date = new Date(), y = date.getFullYear(), m = selectedMonth;
+            var getFirstAndLastDate = function (selectedMonth, year) {
+                var y = parseFloat(year), m = selectedMonth;
                 var firstDay = y + "-" + m + "-" + new Date(y, m, 1).getDate();
                 var lastDay = y + "-" + m + "-" + lastDayOfMonth(y, selectedMonth).getDate();
 
@@ -177,7 +192,7 @@ $.app.controllers.indexController = {
                         row = formRow(cells);
                     //console.log(cells);
                     // console.log(row);
-                    console.log(results);
+                    // console.log(results);
                     datasets.push(chartRow);
                     tableHtml.push(row);
                 }
@@ -189,7 +204,7 @@ $.app.controllers.indexController = {
                 var $placeHolder = $.byId("table-placeholder");
 
                 $templateTable.find("tbody").html(htmlString);
-                console.log($templateTable.html());
+                // console.log($templateTable.html());
                 $placeHolder.empty().append($templateTable);
                 $.byId("summary-table").DataTable({
                     responsive: true,
@@ -207,7 +222,13 @@ $.app.controllers.indexController = {
                     data: datasets,
                     xkey: 'y',
                     ykeys: ['a', 'b', 'c', 'd', 'e', 'f'],
-                    labels: ['Resolved Jiras', 'Resolve without ReOpen', 'ReOpen : Communication Gap', 'ReOpen : defects', , 'ReOpen : Delta', 'ReOpen : Bugs, Legacy']
+                    labels: ['Resolved Jiras',
+                        'Resolve without ReOpen',
+                        'ReOpen : Communication Gap',
+                        'ReOpen : defects',
+                        'ReOpen : Delta',
+                        'ReOpen : Bugs, Legacy'],
+                    barColors: ["#338eef", "green", "yellow", "red", "rgb(59, 70, 78)", "orange"]
                 });
             }
 
@@ -229,7 +250,7 @@ $.app.controllers.indexController = {
                     "filterFields": ["total"]
                 };
 
-                console.log(data.jqls);
+                // console.log(data.jqls);
                 var dataJsonString = JSON.stringify(data);
 
                 $.ajax({
@@ -280,12 +301,19 @@ $.app.controllers.indexController = {
                 // var values = $form.serializeArray();
                 var currentMonthIndex = d.getMonth() + 1;
                 var selectedMonth = parseFloat($monthSelect.val()) + 1;
+                var selectedYear = parseFloat($yearSelect.val());
+                var currentDate = new Date();
                 console.log(selectedMonth);
-                if (selectedMonth > currentMonthIndex) {
+                console.log(selectedYear);
+
+                var dateIsInFuture = (selectedMonth > currentMonthIndex && selectedYear === currentDate.getFullYear()) || selectedYear > currentDate.getFullYear();
+
+                if (dateIsInFuture === true) {
                     toastr["error"]("Sorry your selected month is in future.");
                     return;
                 }
-                var dates = getFirstAndLastDate(selectedMonth);
+
+                var dates = getFirstAndLastDate(selectedMonth, selectedYear);
                 // console.log(dates);
 
 
@@ -317,7 +345,7 @@ $.app.controllers.indexController = {
                     // console.log("starting : " + projectId);
                     // console.log(project);
 
-                    console.log(project.jqls );
+                    // console.log(project.jqls);
                     getJiraResults(project, login);
 
                     projectsListInstance.push(project);
@@ -325,6 +353,7 @@ $.app.controllers.indexController = {
                     $.app.global.documentFullSpinnerShow("... Requsting " + j + " Project(s) ...");
                 }
 
+                console.log(projectsListInstance);
                 //var interval = setInterval(function () {
                 //    if (requestsCompleted === projectsListInstance.length) {
                 //        // all processing done.
@@ -336,7 +365,6 @@ $.app.controllers.indexController = {
                 //},
                 //    400);
 
-                //console.log(projectsListInstance);
 
 
                 //getJiraResults(jqlList, login);

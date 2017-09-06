@@ -62,6 +62,10 @@
         {
             projectsId: "BUTST",
             projectsDisplayName: "Bulter"
+        },
+        {
+            projectsId: "KD",
+            projectsDisplayName: "Kärcher DE"
         }
     ]
 
