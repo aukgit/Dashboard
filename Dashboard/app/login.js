@@ -105,6 +105,12 @@ module.exports = {
 
 
         return null;
-    }
+    },
+	
+	example: function (req, reqParams, post, app, config){
+		
+		console.log(reqParams);
+		return "Hello, " + test;
+	}
 };
 
