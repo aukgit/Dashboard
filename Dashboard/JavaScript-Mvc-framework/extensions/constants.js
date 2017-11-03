@@ -66,6 +66,14 @@
         {
             projectsId: "KD",
             projectsDisplayName: "Kärcher DE"
+        },
+        {
+            projectsId: "KAT",
+            projectsDisplayName: "Kärcher AT"
+        },
+        {
+            projectsId: "UUMG",
+            projectsDisplayName: "UMG"
         }
     ]
 
