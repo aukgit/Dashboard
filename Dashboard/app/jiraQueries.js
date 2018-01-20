@@ -17,7 +17,7 @@ module.exports = {
 
 
         console.log(postData);
-        //console.log(jqls);
+        console.log(jqls);
 
         var getJiraResultsPromise = function (loginx, jql, limit, callBack) {
             var jiraHeader = loginx.jiraHeader;

@@ -174,7 +174,8 @@ $.app.controllers.indexController = {
                     communication: 1,
                     delta: 2,
                     defects: 3,
-                    bugs: 4
+                    bugs: 4,
+                    totalReOpened:5
                 }
 
                 for (var j = 0; j < projectsListInstance.length; j++) {
@@ -186,9 +187,10 @@ $.app.controllers.indexController = {
                         delta = parseFloat(results[indexes.delta].total),
                         defects = parseFloat(results[indexes.defects].total),
                         bugs = parseFloat(results[indexes.bugs].total),
-                        resolvedWithoutReOpen = resolvedJiras - communicationGap - delta - defects,
-                        cells = [title, resolvedJiras, resolvedWithoutReOpen, communicationGap, delta, defects, bugs],
-                        chartRow = { y: title, a: resolvedJiras, b: resolvedWithoutReOpen, c: communicationGap, d: delta, e: defects, f: bugs },
+                        totalReOpened = parseFloat(results[indexes.totalReOpened].total),
+                        resolvedWithoutReOpen = resolvedJiras - totalReOpened,
+                        cells = [title, resolvedJiras, resolvedWithoutReOpen, communicationGap, delta, defects, bugs, totalReOpened],
+                        chartRow = { y: title, a: resolvedJiras, b: resolvedWithoutReOpen, c: communicationGap, d: delta, e: defects, f: bugs, g: totalReOpened },
                         row = formRow(cells);
                     //console.log(cells);
                     // console.log(row);
@@ -247,7 +249,7 @@ $.app.controllers.indexController = {
                     "additionalJiraFilters": {
                         "maxResults": 1
                     },
-                    "filterFields": ["total"]
+                    "filterFields": [ "total" ]//, "issues"]
                 };
 
                 // console.log(data.jqls);

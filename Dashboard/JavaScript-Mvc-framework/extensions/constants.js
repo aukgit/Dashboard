@@ -16,7 +16,8 @@
         " AND \"Reopened Reason\" in (\"Communication Gaps\") ", // all reopen  || project in (@ProjectName)
         " AND \"Reopened Reason\" in (\"Delta Requirements\") ", // all reopen  || project in (@ProjectName)
         " AND \"Reopened Reason\" in (Defects) ", // all reopen  || project in (@ProjectName)        
-        " AND \"Defect Type\" in (\"Defect Post Warranty\", \"Legacy Defect\", \"Product Defect\")"
+        " AND \"Defect Type\" in (\"Defect Post Warranty\", \"Legacy Defect\", \"Product Defect\")",
+        " AND status in (Resolved, Closed) AND \"Times Reopened\" > \"0\""
     ],
     jiraProjects: [
         {
